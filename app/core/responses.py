@@ -1,0 +1,27 @@
+from fastapi.responses import JSONResponse
+
+
+def success_response(data=None, status_code=200):
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "success": True,
+            "data": data,
+            "error": None,
+        },
+    )
+
+
+def error_response(error_type: str, message: str, status_code: int):
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "success": False,
+            "data": None,
+            "error": {
+                "type": error_type,
+                "message": message,
+                "code": status_code,
+            },
+        },
+    )
